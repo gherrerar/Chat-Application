@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <link rel="stylesheet" href="style.css">
+    <title>Chat</title>
+
+</head>
+
+<body>
+    <div class="chat-box">
+        <div class="username-container">
+            <form action="" id="userForm">
+                <input class="name-input" type="text" id="username" required>
+                <label for="username">Digite seu nome</label>
+            </form>
+        </div>
+
+        <div class="user-menu">
+            <span class="name"></span>
+        </div>
+
+        <div class="messages-box">
+            <ul class="message"></ul>
+        </div>
+        
+        <form action="" id="textForm">
+            <input class="text-input" type="text" placeholder="Enviar mensagem">
+            <button class="send-btn disabled" type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io()
+
+        var usernameContainer = document.querySelector(".username-container")
+        var messages = document.querySelector(".message")
+        var messagesBox = document.querySelector(".messages-box")
+
+        var inputName = document.querySelector(".name-input")
+        var username = document.querySelector(".name")
+        var ready = false
+
+        userForm.addEventListener('submit', function(e){
+            e.preventDefault()
+            usernameContainer.classList.add("fadein")
+            setTimeout(function(){
+                usernameContainer.style.display = "none"
+            }, 390)
+
+            var name = inputName.value
+            username.textContent = name
+
+            ready = true
+            socket.emit('join', name)
+        })
+
+        /*Self Version*/
+        textForm.addEventListener('submit', function(e) {
+            e.preventDefault()
+            if (input.value) {
+                var item = document.createElement('li')
+                item.classList.add("self")
+                item.innerHTML = "<span class='name'>" + inputName.value + "</span>    <p>" + input.value + "</p>";
+                messages.appendChild(item)
+
+                socket.emit('chat message', input.value)
+                input.value = ""
+                updateScroll()
+            }
+        })
+
+        /*Other Version*/
+        socket.on('chat message', function(name, msg) {
+            var item = document.createElement('li')
+            item.innerHTML = "<span class='name'>" + name + "</span>    <p>" + msg + "</p>";
+            messages.appendChild(item)
+            updateScroll()
+        })
+
+        /*Info*/
+        socket.on('update', function(msg){
+            if (ready){
+                var info = document.createElement('li')
+                info.classList.add("info")
+                info.innerHTML = msg
+                messages.appendChild(info)
+                updateScroll()
+            }
+        })
+
+        function updateScroll(){
+            messagesBox.scrollTop = messagesBox.scrollHeight
+        }
+    </script>
+</body>
+</html>

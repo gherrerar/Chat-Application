@@ -1,0 +1,275 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:400|Open+Sans:400;500;600;700);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 10px;
+    outline: none;
+}
+::selection {
+    background-color: rgb(79, 207, 141);
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Open Sans";
+    color: #121212;
+}
+
+/*Chat Box*/
+
+.chat-box {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-top: 10rem;
+    width: 100rem;
+    height: 60rem;
+    padding: 2rem 1rem;
+    padding-bottom: 7.5rem;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 56px -12px rgba(0, 0, 0, 0.445);
+    background-color: rgb(44, 206, 122);
+    overflow: hidden;
+}
+
+#textForm {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 2rem 1rem;
+    width: 100%;
+    z-index: 100;
+}
+.text-input {
+    width: 100%;
+    padding: 2rem 3rem;
+    padding-right: 16rem;
+    border: 1px solid #1212123d;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    box-shadow: 0px 8px 10px -10px rgba(0,0,0,0.71);
+    transition: box-shadow 200ms ease-in-out;
+    outline: none;
+}
+
+.text-input:focus {
+    box-shadow: 0px 8px 40px -6px rgba(0,0,0,0.71);
+}
+
+.send-btn.disabled {
+    filter: opacity(0.7);
+    cursor: not-allowed;
+}
+
+.send-btn {
+    position: absolute;
+    margin-right: 1.5rem;
+    padding: 1rem 2rem;
+    right: 0;
+    border: 2px solid rgb(51, 235, 140);
+    border-radius: 4rem;
+    background: transparent;
+    color: rgb(51, 235, 140);
+    font-size: 1.5rem;
+    font-weight: 600;
+    outline: none;
+    overflow: hidden;
+    z-index: 1;
+}
+.send-btn:not(.disabled) {
+    transition: color 200ms ease-in-out;
+    cursor: pointer;
+}
+.send-btn:not(.disabled):hover {
+    color: rgb(255, 255, 255);
+}
+
+.send-btn:not(.disabled)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background-color: rgb(51, 235, 140);
+    transition: transform 200ms ease-in-out;
+    z-index: -1;
+}
+.send-btn:not(.disabled).back::before {
+    transform-origin: right;
+}
+.send-btn:not(.disabled):hover::before {
+    transform: scaleX(1);
+}
+
+
+
+
+
+
+/*Messages*/
+
+.messages-box {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 10rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.messages-box::-webkit-scrollbar {
+    width: 1rem;
+}
+.messages-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+.messages-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2rem;
+}
+
+.message {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 0;
+    left: 0;
+    margin: 2rem 1rem;
+    list-style-type: none;
+}
+.message li {
+    position: relative;
+    margin: 1rem 2rem;
+    padding: 1rem 2rem;
+    width: fit-content;
+    max-width: 40%;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    word-break: break-all;
+    background-color: rgb(243, 243, 243);
+    box-shadow: 0px 8px 10px -10px rgba(0,0,0,0.71);
+}
+.message li.self {
+    margin-left: auto;
+    text-align: right;
+}
+.message li.info {
+    margin: 0.5rem auto;
+    width: 100%;
+    max-width: 80%;
+    text-align: center;
+    background-color: rgba(243, 243, 243, 0.712);
+}
+
+.message li .name {
+    display: inline-block;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+
+
+
+
+/*Username*/
+
+.user-menu {
+    position: relative;
+    width: 100%;
+}
+.user-menu .name {
+    display: inline-block;
+    width: 60%;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#userForm {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 110;
+}
+.name-input {
+    padding: 0.2rem 1rem;
+    width: 30%;
+    border: none;
+    border-bottom: 2px solid rgb(35, 139, 85);
+    background: none;
+    color: rgb(255, 255, 255);
+    opacity: 0.5;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    transition: opacity 200ms ease-in-out;
+    outline: none;
+}
+.name-input:focus,
+.name-input:valid {
+    opacity: 1;
+}
+
+.username-container label {
+    position: absolute;
+    top: 0%;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: text;
+    color: rgb(255, 255, 255);
+    transition: 200ms ease-in-out;
+}
+
+.name-input:focus ~ label, 
+.name-input:valid ~ label {
+    top: -2rem;
+    font-size: 1.4rem;
+}
+
+
+.username-container.fadein {
+    opacity: 1;
+    animation: fadein 400ms ease-in-out;
+}
+@keyframes fadein {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+
+
+
