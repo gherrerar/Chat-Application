@@ -1,14 +1,15 @@
 const express = require('express');
+path = require('path');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
 var clients = {};
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/chat.html');
+app.get('/', (req, res,) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
 });
-app.use(express.static("public"));
+app.use(express.static("../public"));
 
 io.on('connection', (socket) => {
   console.log('Um usuário se conectou');
