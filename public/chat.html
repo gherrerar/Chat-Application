@@ -36,7 +36,7 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
-        var socket = io('https://pacific-hollows-43145.herokuapp.com/')
+        var socket = io(/*'https://pacific-hollows-43145.herokuapp.com/'*/window.location.origin)
 
         var usernameContainer = document.querySelector(".username-container")
         var messages = document.querySelector(".message")
