@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
 const io = require('socket.io')(http, {
   cors: {
     origin: "https://multiplayer-online-chat.netlify.app/chat.html",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["my-custom-header"],
     credentials: true
   }
