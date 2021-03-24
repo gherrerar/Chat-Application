@@ -163,8 +163,14 @@ body {
     box-shadow: 0px 8px 10px -10px rgba(0,0,0,0.71);
 }
 .message li p {
+    text-align: justify;
     white-space: pre-wrap;
+    word-break: break-word;
 }
+.message li.self p {
+    text-align-last: right;
+}
+
 .message li.self {
     margin-left: auto;
     text-align: right;
