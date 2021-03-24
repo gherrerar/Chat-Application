@@ -39,6 +39,7 @@
         var socket = io('https://onlinenode-chat-application.herokuapp.com/'/*window.location.origin*/)
 
         var usernameContainer = document.querySelector(".username-container")
+        var userMenu = document.querySelector(".user-menu")
         var messages = document.querySelector(".message")
         var messagesBox = document.querySelector(".messages-box")
 
@@ -48,9 +49,11 @@
 
         userForm.addEventListener('submit', function(e){
             e.preventDefault()
-            usernameContainer.classList.add("fadein")
+            usernameContainer.classList.add("fadeout")
             setTimeout(function(){
                 usernameContainer.style.display = "none"
+                userMenu.classList.add("fadein")
+                messagesBox.classList.add("fadein")
             }, 390)
 
             var name = inputName.value

@@ -272,15 +272,23 @@ body {
 }
 
 
-.username-container.fadein {
+.username-container.fadeout {
     opacity: 1;
-    animation: fadein 400ms ease-in-out;
+    animation: fadeout 400ms ease-in-out;
 }
-@keyframes fadein {
+@keyframes fadeout {
     0% {opacity: 1;}
     100% {opacity: 0;}
 }
 
+:is(.user-menu, .messages-box).fadein {
+    opacity: 0;
+    animation: fadein 400ms ease-in-out;
+}
+@keyframes fadein {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 
 
 
