@@ -162,6 +162,9 @@ body {
     background-color: rgb(243, 243, 243);
     box-shadow: 0px 8px 10px -10px rgba(0,0,0,0.71);
 }
+.message li p {
+    white-space: pre-wrap;
+}
 .message li.self {
     margin-left: auto;
     text-align: right;
