@@ -7,7 +7,11 @@ const io = require('socket.io')(http);
 
 var clients = {};
 
-app.get('/', (req, res,) => {
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
+});
+app.get('/allow-cors', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
 });
 app.use(express.static("../public"));
