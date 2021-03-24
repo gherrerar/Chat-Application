@@ -283,6 +283,7 @@ body {
 
 :is(.user-menu, .messages-box).fadein {
     opacity: 1;
+    animation-delay: 100ms;
     animation: fadein 400ms ease-in-out;
 }
 @keyframes fadein {
