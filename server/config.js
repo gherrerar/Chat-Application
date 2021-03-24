@@ -1,4 +1,5 @@
 const express = require('express');
+const { Http2ServerRequest } = require('http2');
 const path = require('path');
 const app = express();
 const http = require('http').createServer(app);
@@ -8,10 +9,6 @@ const io = require('socket.io')(http);
 var clients = {};
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
-});
-app.get('/allow-cors', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
   res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
 });
 app.use(express.static("../public"));
@@ -46,3 +43,13 @@ io.on('connection', (socket) => {
     delete clients[socket.id];
   });
 });
+
+
+const io = require('socket.io')(http, {
+  cors: {
+    origin: "https://multiplayer-online-chat.netlify.app/chat.html",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+})
