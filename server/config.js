@@ -5,7 +5,14 @@ const cors = require('cors');
 const app = express();
 const http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+  cors: {
+    origin: '*',
+    /*methods: ['GET', 'PATCH', 'POST', 'PUT'],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true*/
+  }
+});
 
 var clients = {};
 
@@ -45,13 +52,3 @@ io.on('connection', (socket) => {
     delete clients[socket.id];
   });
 });
-
-
-const io = require('socket.io')(http, {
-  cors: {
-    origin: "https://multiplayer-online-chat.netlify.app/chat.html",
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true
-  }
-})
