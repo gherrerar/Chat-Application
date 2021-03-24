@@ -1,6 +1,7 @@
 const express = require('express');
 const { Http2ServerRequest } = require('http2');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 const http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ var clients = {};
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'chat.html'));
 });
+app.use(cors());
 app.use(express.static("../public"));
 
 io.on('connection', (socket) => {
