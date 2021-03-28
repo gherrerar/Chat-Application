@@ -10,7 +10,7 @@ html {
     outline: none;
 }
 ::selection {
-    background-color: rgb(79, 207, 141);
+    background-color: rgba(79, 207, 141, 0.712);
 }
 
 body {
@@ -50,6 +50,7 @@ body {
 .text-input {
     width: 100%;
     padding: 2rem 3rem;
+    padding-left: 5rem;
     padding-right: 16rem;
     border: 1px solid #1212123d;
     border-radius: 4rem;
@@ -112,6 +113,25 @@ body {
     transform: scaleX(1);
 }
 
+#textForm input[type="file"] {
+    display: none;
+}
+#textForm label {
+    position: absolute;
+    margin-left: 1.5rem;
+    left: 0;
+    cursor: pointer;
+}
+#textForm i {
+    font-size: 2.5rem;
+    color: rgb(51, 235, 140);
+    opacity: 0.7;
+    transition: opacity 200ms ease-in-out;
+}
+#textForm i:hover {
+    opacity: 1;
+}
+
 
 
 
@@ -121,6 +141,7 @@ body {
 
 .messages-box {
     position: relative;
+    display: none;
     top: 0;
     left: 0;
     width: 100%;
@@ -165,7 +186,6 @@ body {
 .message li p {
     /*text-align: justify;
     text-justify: inter-word;*/
-    white-space: pre-wrap;
     word-break: break-word;
 }
 /*
@@ -182,6 +202,7 @@ body {
     width: 100%;
     max-width: 80%;
     text-align: center;
+    word-break: break-word;
     background-color: rgba(243, 243, 243, 0.712);
 }
 
@@ -195,6 +216,30 @@ body {
     overflow: hidden;
 }
 
+.link {
+    position: relative;
+    text-decoration: none;
+    color: rgb(76, 190, 131);
+    background-image: linear-gradient(rgb(76, 190, 131), rgb(76, 190, 131));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 0.2rem;
+    transition: color 400ms ease-in-out, background-size 400ms ease-in-out;
+    z-index: 1;
+}
+.link:is(:hover, :focus) {
+    color: #121212;
+    background-size: 100% 0.2rem;
+}
+
+img {
+    margin: 0.5rem 0rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.4rem;
+    user-select: none;
+}
+
 
 
 
@@ -204,6 +249,7 @@ body {
 
 .user-menu {
     position: relative;
+    display: none;
     width: 100%;
 }
 .user-menu .name {
@@ -226,6 +272,7 @@ body {
 }
 
 .username-container {
+    margin-bottom: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -283,7 +330,6 @@ body {
 
 :is(.user-menu, .messages-box).fadein {
     opacity: 1;
-    /*animation-delay: 100ms;*/
     animation: fadein 400ms ease-in-out;
 }
 @keyframes fadein {
@@ -293,3 +339,37 @@ body {
 
 
 
+
+
+
+
+
+/*Media Queries*/
+
+@media screen and (max-width: 1020px) {
+
+    .chat-box {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+
+    .name-input {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .username-container label {
+        font-size: 1.9rem;
+    }
+
+    .text-input {
+        padding-right: 12rem;
+    }
+    .message li {
+        max-width: 55%;
+    }
+}
