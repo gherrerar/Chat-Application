@@ -50,7 +50,7 @@ function unableUser(){
         this.setCustomValidity("Você deve inserir um nome de usuário")
     }
     if (this.validity.patternMismatch){
-        this.setCustomValidity("Insira um nome não vazio")
+        this.setCustomValidity("Insira um nome não vazio e sem espaçamento")
     }
 }
 inputName.oninput = (e) => {
@@ -106,8 +106,6 @@ function checkURL(textCheck) {
     return textCheck.replace(urlRegex, (url) => {
 
         var urlText = url.replace("https://", '')
-
-        console.log("link: " + url)
         
         if (url.lastIndexOf("?") == (url.lenght - 1)){
             url = url.substring(0, url.lenght)
@@ -119,4 +117,45 @@ function checkURL(textCheck) {
             return "<a class='link' href=" + url + " target='_blank'>" + urlText + "</a>";
         }
     })
+}
+
+function showFiles(img, updTest) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+        //if (img.lenght > 1) {
+            for (let i = 0; i < img.length; i++){
+                console.log((i + 1) + " imagem/ns selecionada(s)")
+                var reader = new FileReader();
+                
+                reader.onload = function(readerEvent){
+                    var item = document.createElement('li')
+                    if (updTest) {
+                        item.classList.add("self")
+                    }
+                    else {
+                        item.classList.remove("self")
+                    }
+                    item.innerHTML = "<span class='name'>" + inputName.value + "</span>" + "    <p>" + "<img src='" + readerEvent.target.result + "'>" + "</p>";
+                    messages.appendChild(item)
+                }
+                reader.readAsDataURL(img[i]);
+            }
+        /*}
+        else {
+            console.log("Uma imagem selecionada")
+            var reader = new FileReader();
+            
+            reader.onload = function(readerEvent){
+                var item = document.createElement('li')
+                item.classList.add("self")
+                item.innerHTML = "<span class='name'>" + inputName.value + "</span>" + "    <p>" + "<img src='" + readerEvent.target.result + "'>" + "</p>";
+                messages.appendChild(item)
+            }
+            reader.readAsDataURL(img[0])
+        }*/
+        
+    }
+    else {
+        return alert('Que pena! -.-\nSeu navegador não possui suporte para essa funcionalidade');
+    }
 }

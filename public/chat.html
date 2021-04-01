@@ -34,7 +34,7 @@
             <label for="input-file">
                 <i class="fas fa-plus-circle" title="Upload image"></i>
             </label>
-            <input type="file" id="input-file" accept="image/x-png, image/gif, image/jpeg">
+            <input type="file" id="input-file" accept="image/x-png, image/gif, image/jpeg" multiple>
 
             <button class="send-btn disabled" type="submit">Enviar</button>
         </form>
@@ -43,7 +43,7 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
-        var socket = io('https://onlinenode-chat-application.herokuapp.com/'/*window.location.origin*/)
+        var socket = io(/*'https://onlinenode-chat-application.herokuapp.com/'*/window.location.origin)
 
         var usernameContainer = document.querySelector(".username-container")
         var userMenu = document.querySelector(".user-menu")
@@ -52,7 +52,8 @@
 
         var username = document.querySelector(".name")
         var ready = false
-        var uploadTest = false
+        var updTest = false
+        inputFile.files.length = 0;
 
         /*Username*/
         userForm.addEventListener('submit', function(e){
@@ -74,30 +75,50 @@
         })
 
         /*Self Version*/
+        // if (window.File && window.FileReader && window.FileList && window.Blob) {
+        //         function showFiles(){
+
+        //             for (let i = 0; i < inputFile.files.length; i++){
+        //                 var reader = new FileReader();
+        //                 reader.onload = function(readerEvent){
+        //                     var item = document.createElement('li')
+        //                     item.classList.add("self")
+        //                     item.innerHTML = "<span class='name'>" + inputName.value + "</span>" + "    <p>" + "<img src='" + readerEvent.target.result + "'>" + "</p>";
+        //                     messages.appendChild(item)
+        //                 }
+        //                 reader.readAsDataURL(inputFile.files[i]);
+        //             }
+        //         }
+        // }
+        // else {
+        //     alert('Que pena! -.-\nSeu navegador não possui suporte para essa funcionalidade')
+        // }
+
         textForm.addEventListener('submit', function(e) {
             e.preventDefault()
 
-            /*inputFile.addEventListener("change", function(){
-
-            })*/
-
+            var item = document.createElement('li')
+            item.classList.add("self")
+            
+            //For text/link messages
             if (input.value) {
-                var item = document.createElement('li')
-                item.classList.add("self")
                 item.innerHTML = "<span class='name'>" + inputName.value + "</span>" + "    <p>" + checkURL(input.value) + "</p>";
-                
-                // messages.appendChild(item)
-                // socket.emit('chat message', checkURL(input.value))
-                // input.value = ""
+
+                messages.appendChild(item)
+                socket.emit('chat message', checkURL(input.value))
             }
-            /*if (uploadTest) {
-                item.innerHTML = "<span class='name'>" + inputName.value + "</span>" + "    <p>" + "<img src='" + file.name + "'>"; + "</p>";
-            }*/
 
-            messages.appendChild(item)
-            socket.emit('chat message', checkURL(input.value))
             input.value = ""
+            updateScroll()
+        })
+        inputFile.addEventListener("change", function() {
+            
+            console.log(inputFile.files[0])
+            updTest = true;
+            showFiles(inputFile.files, updTest);
 
+            updTest = false;
+            socket.emit('send image', inputFile.files, updTest)
             updateScroll()
         })
 
@@ -106,6 +127,11 @@
             var item = document.createElement('li')
             item.innerHTML = "<span class='name'>" + name + "</span>    <p>" + msg + "</p>";
             messages.appendChild(item)
+            updateScroll()
+        })
+        socket.on('send image', function(msgImg, test) {
+
+            showFiles(msgImg, test);
             updateScroll()
         })
 

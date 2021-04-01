@@ -2,7 +2,8 @@ const express = require('express');
 const { Http2ServerRequest } = require('http2');
 const path = require('path');
 const cors = require('cors');
-const { fstat } = require('fs');
+const fs = require('fs');
+const { error } = require('console');
 const app = express();
 const http = require('http').createServer(app);
 const port = process.env.PORT || 3000;
@@ -47,6 +48,11 @@ io.on('connection', (socket) => {
     console.log('Mensagem: ' + msg);
     socket.broadcast.emit('chat message', clients[socket.id], msg);
   });
+
+  socket.on('send image', (msgImg, test) => {
+    console.log('Imagem enviada');
+    socket.broadcast.emit('send image', msgImg, test);
+  })
 
   socket.on('disconnect', () => {
     io.emit('update', clients[socket.id] + ' saiu do chat');
