@@ -43,7 +43,7 @@
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
     <script>
-        var socket = io(/*'https://onlinenode-chat-application.herokuapp.com/'*/window.location.origin)
+        var socket = io('https://onlinenode-chat-application.herokuapp.com/'/*window.location.origin*/)
 
         var usernameContainer = document.querySelector(".username-container")
         var userMenu = document.querySelector(".user-menu")
