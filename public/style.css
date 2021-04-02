@@ -383,9 +383,9 @@ path.eye {
 @keyframes move {
     0%, 40%, 58%, 60%, 78%, 100% {transform: translate(0rem, 0rem);}
     45%, 54% {transform: translate(-3rem, -0.5rem);}
-    50% {transform: translate(-6rem, -2rem) rotate(1deg);}
+    50% {transform: translate(-6rem, -2rem) rotate(1deg) scaleX(0.96);}
     65%, 74% {transform: translate(3rem, -0.5rem);}
-    70% {transform: translate(6rem, -2rem) rotate(-1deg);}
+    70% {transform: translate(6rem, -2rem) rotate(-1deg) scaleX(0.96);}
 }
 
 
