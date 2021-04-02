@@ -49,8 +49,14 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('chat message', clients[socket.id], msg);
   });
 
-  socket.on('send image', (msgImg, test) => {
+  socket.on('send image', (data) => {
     console.log('Imagem enviada');
+    var files = {};
+    var fileAux = JSON.parse(data);
+    console.log(fileAux)
+    msgImg = files[fileAux.files];
+    test = files[fileAux.boolean];
+
     socket.broadcast.emit('send image', msgImg, test);
   })
 

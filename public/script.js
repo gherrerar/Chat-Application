@@ -23,6 +23,17 @@ sendBtn.addEventListener("mouseleave", function(){
 
 
 
+let icon = document.querySelector("#mascot")
+icon.addEventListener("click", function(){
+    icon.classList.add("clicked")
+    setTimeout(function(){
+        icon.classList.remove("clicked")
+    }, 120)
+})
+
+
+
+
 /*Input Validation*/
 
 input.addEventListener("keyup", disableTest)
