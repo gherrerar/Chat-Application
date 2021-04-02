@@ -24,7 +24,7 @@ sendBtn.addEventListener("mouseleave", function(){
 
 
 let icon = document.querySelector("#mascot")
-icon.addEventListener("click", function(){
+icon.addEventListener("mousedown", function(){
     icon.classList.add("clicked")
     setTimeout(function(){
         icon.classList.remove("clicked")
